@@ -22,6 +22,7 @@ public class Application {
 
             if (indice == 0) {
                 exit = true;
+                Utilitaire.Utils.copyright();
             } else {
                 String path = "main/src/TestsFiles/testFile" + indice;
                 List<String> file = Utils.readFile(path);

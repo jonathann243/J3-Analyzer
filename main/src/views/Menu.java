@@ -9,7 +9,7 @@ public class Menu {
                 + "\n\t Entrer le numero correspondant au fichier à ouvrir");
         System.out.println("\t 1. Procédure calcule [correct]");
         System.out.println("\t 2. Procédure calcule [incorrect]");
-        System.out.println("\t 3. Quitter");
+        System.out.println("\t 0. Quitter");
     }
 
 }
