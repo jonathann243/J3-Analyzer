@@ -13,4 +13,6 @@ public class LexicalAnalyzer {
     public void analyse() {
         System.out.println("Je commence l'analyse du fichier file qui contient en tout " + file.size() + " lignes");
     }
+
+    
 }
