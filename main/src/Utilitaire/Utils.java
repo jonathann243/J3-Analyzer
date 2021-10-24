@@ -26,14 +26,36 @@ public class Utils {
 
     /**
      * Methode qui permet de récupérer les inputs en entier entrés par l'utilisateur
+     * N'accepte que les entiers (chiffres)
      * 
      * @param message Le message à afficher à l'utilisateur
      * @return int
      */
-    public static int getInputInt(String message) {
-        System.out.print(message);
-        System.out.print("\n\t $> ");
-        return scanner.nextInt();
+    public static int getInputOnlyDigit(String message) {
+        String response;
+        do {
+            System.out.print(message);
+            System.out.print("\n\t $> ");
+            response = scanner.nextLine();
+        } while (!isDigit(response));
+        return Integer.parseInt(response);
+    }
+
+    /**
+     * Methode qui vérifie si chaque character de la chaine de caractère passé en
+     * paramètre est un chiffre
+     * 
+     * @param str La chaine de caractère à vérifier
+     * 
+     * @return boolean
+     */
+    public static boolean isDigit(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /* Copyright */
@@ -42,6 +64,7 @@ public class Utils {
         System.out.println("║ \tCopyright 2021 - Toute Reproduction Interdite ©       ║");
         System.out.println("║ @Authors : Josue Lubaki & Jonathan Kanyinda & Jordan Kuibia ║");
         System.out.println("╚═════════════════════════════════════════════════════════════╝");
+        System.exit(1);
     }
 
     /**

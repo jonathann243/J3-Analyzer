@@ -9,10 +9,11 @@ public class LexicalAnalyzer {
         this.file = file;
     }
 
-    // Analyse Lexical du fichier file
-    public void analyse() {
+    /**
+     * Methode qui permet de lancer l'analyse lexicale
+     */
+    public void start() {
         System.out.println("Je commence l'analyse du fichier file qui contient en tout " + file.size() + " lignes");
     }
 
-    
 }
