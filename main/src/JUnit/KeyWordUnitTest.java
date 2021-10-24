@@ -1,19 +1,16 @@
 package JUnit;
 
 import LexicalUnit.KeyWordUnit;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KeyWordUnitTest {
 
-    @Test
-    public void isKeyWord() {
-        String motClef = "Procedure"; // OUI
-        String motClef2 = "integer"; // NON
-
+    @ParameterizedTest
+    @ValueSource(strings = {"Procedure","entier","reel","declare","Fin_Procedure"})
+    void isKeyWord(String motClef) {
         assertTrue(KeyWordUnit.isKeyWord(motClef), "Est-ce un mot clef ?");
-        assertFalse(KeyWordUnit.isKeyWord(motClef2), "Est-ce un mot clef ?");
     }
 }

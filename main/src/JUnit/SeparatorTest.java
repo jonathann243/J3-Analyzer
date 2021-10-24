@@ -1,21 +1,15 @@
 package JUnit;
 
 import LexicalUnit.Separator;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SeparatorTest {
 
-    @Test
-    public void isSeparator() {
-        String separator = "=";
-        String separator2 = "+";
-        String separator3 = ")";
-
+    @ParameterizedTest
+    @ValueSource(strings = {"=","(",")",";",":"})
+    void isSeparator(String separator) {
         assertTrue(Separator.isSeparator(separator), "est-ce un séparateur ?");
-        assertFalse(Separator.isSeparator(separator2), "est-ce un séparateur ?");
-        assertTrue(Separator.isSeparator(separator3), "est-ce un séparateur ?");
     }
 }
