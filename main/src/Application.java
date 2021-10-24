@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.List;
 
 import LexicalAnalyzer.LexicalAnalyzer;
@@ -7,7 +8,7 @@ import views.Menu;
 
 public class Application {
     public static void start() {
-        
+
         // Affichage du menu
         Menu.showMenu();
 
@@ -19,7 +20,7 @@ public class Application {
             Utilitaire.Utils.copyright();
         } else {
             String path = "main/src/TestsFiles/testFile" + indice;
-            List<String> file = Utils.readFile(path);
+            List<String> lines = Utils.readFile(path);
 
             try {
                 Thread.sleep(500);
@@ -27,7 +28,7 @@ public class Application {
                 e.printStackTrace();
             }
 
-            startLexicalAnalyzer(file);
+            startLexicalAnalyzer(lines);
         }
     }
 

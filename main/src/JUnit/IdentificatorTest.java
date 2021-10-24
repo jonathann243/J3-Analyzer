@@ -10,7 +10,7 @@ public class IdentificatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"abcdefgh","     abcd      "})
-    void isIdentificatorValid(String identificator) {
+    void isIdentificator(String identificator) {
         assertTrue(Identificator.isIdentificator(identificator), "Taille de l'identifacteur inférieure à 8");
     }
 
