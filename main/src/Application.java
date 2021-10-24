@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.List;
 
 import LexicalAnalyzer.LexicalAnalyzer;
@@ -7,38 +9,41 @@ import views.Menu;
 public class Application {
     public static void start() {
 
-        boolean exit = false;
+        // Affichage du menu
+        Menu.showMenu();
 
-        do {
-            // Affichage du menu
-            Menu.showMenu();
+        // Récupération de la saisie utilisateur
+        int indice = Utilitaire.Utils.getInputOnlyDigit("\n\tVeuillez choisir une option : ");
+        Utilitaire.Utils.closeScanner();
 
-            int indice = 0;
+        if (indice == 0) {
+            Utilitaire.Utils.copyright();
+        } else {
+            String path = "main/src/TestsFiles/testFile" + indice;
+            List<String> lines = Utils.readFile(path);
+
             try {
-                indice = Integer.parseInt(Utilitaire.Utils.getInput("\n\tVeuillez choisir une option : "));
-            } catch (Exception e) {
-                System.out.println("Erreur de saisi...");
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
-            if (indice == 0) {
-                exit = true;
-                Utilitaire.Utils.copyright();
-            } else {
-                String path = "main/src/TestsFiles/testFile" + indice;
-                List<String> file = Utils.readFile(path);
+            startLexicalAnalyzer(lines);
+        }
+    }
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                // Début du traitement d'analyse lexicale
-                LexicalAnalyzer analyzer = new LexicalAnalyzer(file);
-                analyzer.analyse();
-            }
-            Utilitaire.Utils.closeScanner();
-        } while (!exit);
-
+    /**
+     * Lancement du lexical analyzer
+     *
+     * @param file
+     */
+    private static void startLexicalAnalyzer(List<String> file) {
+        if (file.isEmpty()) {
+            System.out.println("\tAnalyse Lexicale $> Désolé, Le fichier est vide !");
+        } else {
+            // Début du traitement d'analyse lexicale
+            LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(file);
+            lexicalAnalyzer.start();
+        }
     }
 }

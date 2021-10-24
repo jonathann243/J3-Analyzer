@@ -26,7 +26,7 @@ public class Identificator implements ILexicalUnit {
      * inférieure ou égale à 8 caractères
      * 
      * @param identificator mot à vérifier
-     * @return true si le mot est inférieur à 8 caractères, false sinon
+     * @return true si le mot est inférieur ou égale à 8 caractères, false sinon
      */
     public static boolean isIdentificator(String identificator) {
         return identificator.trim().length() <= 8;
