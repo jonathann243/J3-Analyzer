@@ -10,7 +10,7 @@ public class OperatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"+","-","*","/"})
-    void isOperator(String op) {
+    void isOperator(char op) {
         assertTrue(Operator.isOperator(op), "Est-ce un opérateur");
     }
 }

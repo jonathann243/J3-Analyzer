@@ -29,9 +29,9 @@ public class Operator implements ILexicalUnit {
      * @param operator opérateur à vérifier
      * @return true si l'opérateur est un opérateur, false sinon
      */
-    public static boolean isOperator(String operator) {
+    public static boolean isOperator(char operator) {
         for (OperatorEnum op : OperatorEnum.values()) {
-            if (op.getSymbole().equals(operator)) {
+            if (op.getSymbole() == operator) {
                 return true;
             }
         }

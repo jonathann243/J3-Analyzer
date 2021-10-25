@@ -9,7 +9,7 @@ public class SeparatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"=","(",")",";",":"})
-    void isSeparator(String separator) {
+    void isSeparator(char separator) {
         assertTrue(Separator.isSeparator(separator), "est-ce un séparateur ?");
     }
 }

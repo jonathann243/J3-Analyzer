@@ -1,5 +1,10 @@
 package Utilitaire;
 
+import LexicalUnit.Identificator;
+import LexicalUnit.KeyWordUnit;
+import LexicalUnit.Operator;
+import LexicalUnit.Separator;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -56,6 +61,71 @@ public class Utils {
             }
         }
         return true;
+    }
+
+    /**
+     * Methode qui vérifie si le character passé en paramètre est un chiffre
+     * @param ch character à vérifier
+     * @return boolean
+     */
+    public static boolean isDigit(char ch){
+        return Character.isDigit(ch);
+    }
+
+    /**
+     * Methode qui vérifie si le character passé en paramètre est une lettre
+     * @param ch character à vérifier
+     * @return boolean
+     */
+    public static boolean isLetter(char ch){
+        return Character.isLetter(ch);
+    }
+
+
+
+    /**
+     * Methode qui vérifie si le character passé en paramètre est un opérateur
+     * @param ch character à vérifier
+     * @return boolean
+     */
+    public static boolean isOperator(char ch){
+        return Operator.isOperator(ch);
+    }
+
+    /**
+     * Methode qui vérifie si la chaine des caractères passée en paramètre est un mot clé
+     * @param str chaine des caractères à vérifier
+     * @return boolean
+     */
+    public static boolean isKeyWord(String str){
+        return KeyWordUnit.isKeyWord(str);
+    }
+
+    /**
+     * Methode qui vérifie si la chaine des caractères passée en paramètre est un identificator
+     * @param str chaine des caractères à vérifier
+     * @return boolean
+     */
+    public static boolean isIdentificator(String str){
+        return Identificator.isIdentificator(str);
+    }
+
+    /**
+     * Methode qui vérifie si la chaine des caractères passée en paramètre contient un '_' underscore
+     * @param str chaine des caractères à vérifier
+     * @return boolean
+     */
+    public static boolean isContainsUndescore(String str){
+        return Identificator.containsUnderscore(str);
+    }
+
+    /**
+     * Methode qui vérifie si le character passé en paramètre est un separator
+     * @param ch character à vérifier
+     * @return boolean
+     */
+    public static boolean isSeparator(char ch){
+        return Separator.isSeparator(ch);
     }
 
     /* Copyright */
