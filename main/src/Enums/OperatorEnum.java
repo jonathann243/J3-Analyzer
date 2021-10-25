@@ -1,15 +1,15 @@
 package Enums;
 
 public enum OperatorEnum {
-    PLUS("+"), MOINS("-"), MULTIPLY("*"), DIVISE("/");
+    PLUS('+'), MOINS('-'), MULTIPLY('*'), DIVISE('/');
 
-    private String symbole;
+    private char symbole;
 
-    OperatorEnum(String symbole) {
+    OperatorEnum(char symbole) {
         this.symbole = symbole;
     }
 
-    public String getSymbole() {
+    public char getSymbole() {
         return symbole;
     }
 }

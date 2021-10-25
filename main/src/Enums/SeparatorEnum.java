@@ -1,15 +1,15 @@
 package Enums;
 
 public enum SeparatorEnum {
-    SEMICOLON(";"), DOUBLEPOINT(":"), BRACKETOPEN("("), BRACKETCLOSE(")"), EQUALITY("=");
+    SEMICOLON(';'), DOUBLEPOINT(':'), BRACKETOPEN('('), BRACKETCLOSE(')'), EQUALITY('=');
 
-    private String separator;
+    private char separator;
 
-    SeparatorEnum(String separator) {
+    SeparatorEnum(char separator) {
         this.separator = separator;
     }
 
-    public String getSeparator() {
+    public char getSeparator() {
         return separator;
     }
 }

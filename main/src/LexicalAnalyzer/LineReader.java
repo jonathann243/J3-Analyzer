@@ -95,7 +95,7 @@ public class LineReader {
      * @return boolean - true si on est à la fin de la ligne, false sinon
      */
     public boolean isEOL() {
-        return cursor >= line.length()-1;
+        return cursor >= line.length();
     }
 
     /**

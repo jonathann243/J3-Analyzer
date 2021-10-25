@@ -28,9 +28,9 @@ public class Separator implements ILexicalUnit {
      * @param separatorValue séparateur à vérifier
      * @return true si le séparateur est un séparateur définie dans l'enum SeparatorEnum, false sinon
      */
-    public static Boolean isSeparator(String separatorValue) {
+    public static Boolean isSeparator(char separatorValue) {
         for (SeparatorEnum separator : SeparatorEnum.values()) {
-            if (separator.getSeparator().equals(separatorValue)) {
+            if (separator.getSeparator() == separatorValue) {
                 return true;
             }
         }

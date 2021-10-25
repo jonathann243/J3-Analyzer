@@ -53,7 +53,7 @@ class LineReaderTest {
 
     @Test
     void isEOL() {
-        String str = "B";
+        String str = "";
 
         reader = new LineReader();
         reader.setLine(str);
