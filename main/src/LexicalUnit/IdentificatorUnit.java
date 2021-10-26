@@ -3,12 +3,12 @@ package LexicalUnit;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
-@IEntity(typeModel = Identificator.class)
-public class Identificator implements ILexicalUnit {
+@IEntity(typeModel = IdentificatorUnit.class)
+public class IdentificatorUnit implements ILexicalUnit {
 
     private String identificator;
 
-    public Identificator(String identificator) {
+    public IdentificatorUnit(String identificator) {
         this.identificator = identificator;
     }
 

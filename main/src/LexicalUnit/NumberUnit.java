@@ -3,12 +3,12 @@ package LexicalUnit;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
-@IEntity(typeModel = Number.class)
-public class Number implements ILexicalUnit {
+@IEntity(typeModel = NumberUnit.class)
+public class NumberUnit implements ILexicalUnit {
 
     private String value;
 
-    public Number(String value) {
+    public NumberUnit(String value) {
         this.value = value;
     }
 

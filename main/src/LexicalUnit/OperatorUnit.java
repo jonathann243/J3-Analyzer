@@ -4,22 +4,22 @@ import Enums.OperatorEnum;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
-@IEntity(typeModel = Operator.class)
-public class Operator implements ILexicalUnit {
+@IEntity(typeModel = OperatorUnit.class)
+public class OperatorUnit implements ILexicalUnit {
 
-    private String operator;
+    private char operator;
 
-    public Operator(String operator) {
+    public OperatorUnit(char operator) {
         this.operator = operator;
     }
 
-    public String getOperator() {
+    public char getOperator() {
         return operator;
     }
 
     @Override
     public String getStrToken() {
-        return operator;
+        return String.valueOf(operator);
     }
 
     /**
