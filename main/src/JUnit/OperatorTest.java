@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OperatorTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"+","-","*","/"})
+    @ValueSource(chars = {'+','-','*','/'})
     void isOperator(char op) {
         assertTrue(OperatorUnit.isOperator(op), "Est-ce un opérateur");
     }

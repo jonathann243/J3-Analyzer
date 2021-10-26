@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SeparatorTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"=","(",")",";",":"})
+    @ValueSource(chars = {'=','(',')',';',':'})
     void isSeparator(char separator) {
         assertTrue(SeparatorUnit.isSeparator(separator), "est-ce un séparateur ?");
     }

@@ -1,5 +1,7 @@
 package LexicalAnalyzer;
 
+import Enums.LexicalAnalyzerExceptionEnums;
+import ExceptionCustom.LexicalAnalyzerException;
 import LexicalUnit.IdentificatorUnit;
 import LexicalUnit.KeyWordUnit;
 import LexicalUnit.NumberUnit;
@@ -23,11 +25,20 @@ public class LexicalAnalyzer {
         this.reader = new LineReader();
     }
 
-    // TODO: Implementer l'analyseur Lexical et ses différents cas
     /**
-     * Methode qui permet de lancer l'analyse lexicale
+     * Lancement du lexical analyzer
+     * <p>
+     *  Lancement de l'analyse, on récupère une ligne de la liste, puis on vérifie le premier caractère du mot,
+     *  celui-ci determine dans quel cas nous nous situons parmi ceux implémentés
+     * </p>
+     *
+     * @see #caseCharIsLetter(char charCurrent) le cas où la lettre courant est une lettre
+     * @see #caseCharIsDigit(char charCurrent) le cas où la lettre courant est un chiffre
+     * @see #caseCharIsOperator(char charCurrent) le cas où la lettre courant est un opérateur
+     * @see #caseCharIsSeparator(char charCurrent) le cas où la lettre courant est un séparateur
+     * @throws LexicalAnalyzerException lorsqu'une erreur survient lors de l'analyse, elle catégorise l'erreur selon son type
      */
-    public void start() {
+    public void start() throws LexicalAnalyzerException {
         String lineCurrent;
         char charCurrent;
 
@@ -67,19 +78,19 @@ public class LexicalAnalyzer {
     }
 
     /**
-     * Méthode à éxecuter dans le cas où le caractère courant est une lettre
+     * Méthode à exécuter dans le cas où le caractère courant est une lettre
      * 
      * @param currentChar le caractère courant à analyser
+     * @throws LexicalAnalyzerException lorsqu'une erreur survient lors de l'analyse, elle catégorise l'erreur selon son type
      */
-    private void caseCharIsLetter(char currentChar) {
+    private void caseCharIsLetter(char currentChar) throws LexicalAnalyzerException {
         StringBuilder token = new StringBuilder();
 
         token.append(currentChar);
         reader.nextCharForward();
 
         // Si on est pas à la fin de la ligne et que le caractère courant est une suite
-        // de lettre
-        // chiifre ou le caractère '_' underscore
+        // de lettre chiffre ou le caractère '_' underscore
         while (!reader.isEOL()
                 && (isLetter(reader.currentChar()) || isDigit(reader.currentChar()) || reader.currentChar() == '_')) {
             token.append(reader.currentChar());
@@ -92,12 +103,9 @@ public class LexicalAnalyzer {
             Token sToken = new Token(lineNumber, keyWord);
             tokens.add(sToken);
         }
-        // token n'est pas un mot clé mais il contient underscore "_"
+        // token n'est pas un mot clé et il contient underscore "_"
         else if (isContainsUndescore(token.toString())) {
-            // TODO lancer un throw new LexicalException, en créant un custom Exception
-            // (LexicalAnalyzerException)
-            // throw new LexicalAnalyzerException("Erreur lexical (Ligne "+ lineNumber +"):
-            // L'identificateur "+ token.toString() +" n'est pas correct");
+            throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.IDENTIFIANT_UNDERSCORE_ERROR, lineNumber);
         }
 
         else if (isIdentificator(token.toString())) {
@@ -106,9 +114,7 @@ public class LexicalAnalyzer {
             tokens.add(sToken);
         } else {
             // TODO Tenter de récupérer l'erreur, sinon
-            // CODE ICI
-            // throw new LexicalAnalyzerException("Erreur lexical (Ligne "+ lineNumber +"):
-            // L'identificateur "+ token.toString() +" n'est pas correct");
+            throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.IDENTIFIANT_ERROR, lineNumber);
         }
 
     }
@@ -117,9 +123,8 @@ public class LexicalAnalyzer {
      * Méthode à éxecuter dans le cas où le caractère courant est un chiffre
      * 
      * @param currentChar le caractère courant à analyser
-     * @return void
      */
-    private void caseCharIsDigit(char currentChar) {
+    private void caseCharIsDigit(char currentChar) throws LexicalAnalyzerException {
         StringBuilder token = new StringBuilder();
 
         token.append(currentChar);
@@ -139,9 +144,7 @@ public class LexicalAnalyzer {
             tokens.add(sToken);
         } else {
             // TODO Tenter de récupérer l'erreur, sinon
-            // CODE ICI
-            // throw new LexicalAnalyzerException("Erreur lexical (Ligne "+ lineNumber +"):
-            // L'entier "+ token.toString() +" n'est pas correct");
+            throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.DIGIT_ERROR, lineNumber);
         }
     }
 
@@ -149,12 +152,12 @@ public class LexicalAnalyzer {
      * Méthode à éxecuter dans le cas où le caractère courant est un opérator
      * 
      * @param currentChar le caractère courant à analyser
-     * @return void
      */
     private void caseCharIsOperator(char currentChar) {
         OperatorUnit operator = new OperatorUnit(currentChar);
         Token sToken = new Token(lineNumber, operator);
         tokens.add(sToken);
+
         // bouger le curseur sur le caractère suivant
         reader.nextCharForward();
     }
@@ -168,6 +171,7 @@ public class LexicalAnalyzer {
         SeparatorUnit separator = new SeparatorUnit(currentChar);
         Token sToken = new Token(lineNumber, separator);
         tokens.add(sToken);
+
         // bouger le curseur sur le caractère suivant
         reader.nextCharForward();
     }
