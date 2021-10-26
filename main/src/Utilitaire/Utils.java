@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 public class Utils {
     static Scanner scanner = new Scanner(System.in);
 

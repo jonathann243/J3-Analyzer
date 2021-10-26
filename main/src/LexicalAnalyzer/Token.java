@@ -3,11 +3,15 @@ package LexicalAnalyzer;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
+/**
+ * @author Jordan Kuibia
+ * @version 1.0
+ */
 public class Token {
-    private String strToken;
-    private IEntity entity;
-    private Class classToken;
-    private int lineNumber;
+    private final String strToken;
+    private final IEntity entity;
+    private final Class classToken;
+    private final int lineNumber;
 
     public <T extends ILexicalUnit> Token(int nLine, T token) {
         this.strToken = token.getStrToken();

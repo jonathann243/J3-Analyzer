@@ -2,6 +2,10 @@ package ExceptionCustom;
 
 import Enums.LexicalAnalyzerExceptionEnums;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 public class LexicalAnalyzerException extends Exception {
     /**
      * Constructeur de l'exception d'analyse Lexical
@@ -10,9 +14,9 @@ public class LexicalAnalyzerException extends Exception {
      *     throw new LexicalAnalyzerException(A,5) <br>
      *     <h2> possible value for A :</h2>
      *     <ul>
-     *         <li><b><span color="lime">{@link LexicalAnalyzerExceptionEnums#IDENTIFIANT_UNDERSCORE_ERROR}</b></li>
-     *         <li><b><span color="lime">{@link LexicalAnalyzerExceptionEnums#IDENTIFIANT_ERROR}</b></li>
-     *         <li><b><span color="lime">{@link LexicalAnalyzerExceptionEnums#DIGIT_ERROR}</b></li>
+     *         <li><b><span color="lime">{@link LexicalAnalyzerExceptionEnums#IDENTIFIANT_UNDERSCORE_ERROR}</span></b></li>
+     *         <li><b><span color="lime">{@link LexicalAnalyzerExceptionEnums#IDENTIFIANT_ERROR}</span></b></li>
+     *         <li><b><span color="lime">{@link LexicalAnalyzerExceptionEnums#DIGIT_ERROR}</span></b></li>
      *     </ul>
      * </p>
      *

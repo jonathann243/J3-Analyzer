@@ -1,5 +1,9 @@
 package views;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 public class Menu {
     /**
      * Methode qui permet de lire le menu principal de l'Application

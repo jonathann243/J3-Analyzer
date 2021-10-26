@@ -5,6 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 public class SeparatorTest {
 
     @ParameterizedTest

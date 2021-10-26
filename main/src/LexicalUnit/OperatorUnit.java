@@ -4,6 +4,10 @@ import Enums.OperatorEnum;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
+/**
+ * @author Jonathan Kanyinda
+ * @version 1.0
+ */
 @IEntity(typeModel = OperatorUnit.class)
 public class OperatorUnit implements ILexicalUnit {
 
