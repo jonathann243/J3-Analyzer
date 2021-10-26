@@ -1,6 +1,6 @@
 package JUnit;
 
-import LexicalUnit.Identificator;
+import LexicalUnit.IdentificatorUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,13 +11,13 @@ public class IdentificatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"abcdefgh","     abcd      "})
     void isIdentificator(String identificator) {
-        assertTrue(Identificator.isIdentificator(identificator), "Taille de l'identifacteur inférieure à 8");
+        assertTrue(IdentificatorUnit.isIdentificator(identificator), "Taille de l'identifacteur inférieure à 8");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"ab_","_"})
     void containsUnderscore(String str) {
-        assertTrue(Identificator.containsUnderscore(str), "l'identifacteur contient underscore");
+        assertTrue(IdentificatorUnit.containsUnderscore(str), "l'identifacteur contient underscore");
     }
 
 }

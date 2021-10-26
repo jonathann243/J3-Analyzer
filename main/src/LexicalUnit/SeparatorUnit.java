@@ -4,29 +4,31 @@ import Enums.SeparatorEnum;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
-@IEntity(typeModel = Separator.class)
-public class Separator implements ILexicalUnit {
+@IEntity(typeModel = SeparatorUnit.class)
+public class SeparatorUnit implements ILexicalUnit {
 
-    private String separator;
+    private char separator;
 
-    public Separator(String separator) {
+    public SeparatorUnit(char separator) {
         this.separator = separator;
     }
 
-    public String getSeparator() {
+    public char getSeparator() {
         return separator;
     }
 
     @Override
     public String getStrToken() {
-        return separator;
+        return String.valueOf(separator);
     }
 
     /**
-     * Methode qui permet de vérifier si le separateur est un séparateur définie dans l'enum SeparatorEnum
+     * Methode qui permet de vérifier si le separateur est un séparateur définie
+     * dans l'enum SeparatorEnum
      * 
      * @param separatorValue séparateur à vérifier
-     * @return true si le séparateur est un séparateur définie dans l'enum SeparatorEnum, false sinon
+     * @return true si le séparateur est un séparateur définie dans l'enum
+     *         SeparatorEnum, false sinon
      */
     public static Boolean isSeparator(char separatorValue) {
         for (SeparatorEnum separator : SeparatorEnum.values()) {

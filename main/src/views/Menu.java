@@ -1,6 +1,9 @@
 package views;
 
 public class Menu {
+    /**
+     * Methode qui permet de lire le menu principal de l'Application
+     */
     public static void showMenu() {
         System.out.println("\t\t\t╔═════════════════════╗");
         System.out.println("\t\t\t║    MENU PRINCIPAL   ║");

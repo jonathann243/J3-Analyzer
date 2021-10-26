@@ -1,9 +1,9 @@
 package Utilitaire;
 
-import LexicalUnit.Identificator;
+import LexicalUnit.IdentificatorUnit;
 import LexicalUnit.KeyWordUnit;
-import LexicalUnit.Operator;
-import LexicalUnit.Separator;
+import LexicalUnit.OperatorUnit;
+import LexicalUnit.SeparatorUnit;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -89,7 +89,7 @@ public class Utils {
      * @return boolean
      */
     public static boolean isOperator(char ch){
-        return Operator.isOperator(ch);
+        return OperatorUnit.isOperator(ch);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Utils {
      * @return boolean
      */
     public static boolean isIdentificator(String str){
-        return Identificator.isIdentificator(str);
+        return IdentificatorUnit.isIdentificator(str);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Utils {
      * @return boolean
      */
     public static boolean isContainsUndescore(String str){
-        return Identificator.containsUnderscore(str);
+        return IdentificatorUnit.containsUnderscore(str);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Utils {
      * @return boolean
      */
     public static boolean isSeparator(char ch){
-        return Separator.isSeparator(ch);
+        return SeparatorUnit.isSeparator(ch);
     }
 
     /* Copyright */
