@@ -51,7 +51,7 @@ public class LexicalAnalyzer {
 
             // passer la ligne au lecteur
             reader.setLine(lineCurrent);
-
+           
             do {
                 charCurrent = reader.currentChar();
                 if (charCurrent == ' ' || charCurrent == '\t') {
@@ -130,9 +130,15 @@ public class LexicalAnalyzer {
         token.append(currentChar);
         reader.nextCharForward();
 
+        // Si un chiffre est suivi immediatemment d'une lettre, on lance une exception  
+        
+
         // Si on est pas à la fin de la ligne et que le caractère courant est une suite
         // de chiffre
-        while (!reader.isEOL() && (isDigit(reader.currentChar()) || reader.currentChar() == '.')) {
+        while (!reader.isEOL() && ( isDigit(reader.currentChar()) || reader.currentChar() == '.' || isLetter(reader.currentChar())  )  ) {
+            if (isLetter(reader.currentChar() )){
+                throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.DIGIT_ERROR, lineNumber);
+             }
             token.append(reader.currentChar());
             reader.nextCharForward();
         }

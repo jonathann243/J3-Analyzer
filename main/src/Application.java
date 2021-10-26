@@ -7,7 +7,7 @@ import views.Menu;
 
 public class Application {
     /**
-     * Methode qui permet de démarrer l'application
+     * Methode qui permet de démarrer l'applicationn
      * @throws LexicalAnalyzerException lorsqu'une erreur survient lors de l'analyse, elle catégorise l'erreur selon son type
      */
     public static void start() throws LexicalAnalyzerException {

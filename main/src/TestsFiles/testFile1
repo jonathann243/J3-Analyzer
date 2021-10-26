@@ -2,8 +2,8 @@ Procedure calcul
     declare a : entier;
     declare b : entier;
 
-    a = 5
-    b = 2
+    a = 500
+    6popo =- 2
     a = 6 - b
     
 Fin_Procedure
