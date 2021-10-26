@@ -1,5 +1,9 @@
 package LexicalAnalyzer;
 
+/**
+ * @author Jonathan Kanyinda
+ * @version 1.0
+ */
 public class LineReader {
     private String line;
     private int cursor;

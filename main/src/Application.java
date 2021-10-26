@@ -5,9 +5,13 @@ import LexicalAnalyzer.LexicalAnalyzer;
 import Utilitaire.Utils;
 import views.Menu;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 public class Application {
     /**
-     * Methode qui permet de démarrer l'applicationn
+     * Methode qui permet de démarrer l'application
      * @throws LexicalAnalyzerException lorsqu'une erreur survient lors de l'analyse, elle catégorise l'erreur selon son type
      */
     public static void start() throws LexicalAnalyzerException {

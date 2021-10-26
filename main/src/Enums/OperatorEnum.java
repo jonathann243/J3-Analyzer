@@ -1,5 +1,9 @@
 package Enums;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 public enum OperatorEnum {
     PLUS('+'), MOINS('-'), MULTIPLY('*'), DIVISE('/');
 

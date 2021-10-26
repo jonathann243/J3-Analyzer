@@ -13,6 +13,10 @@ import java.util.List;
 
 import static Utilitaire.Utils.*;
 
+/**
+ * @author Josue Lubaki & Jonathan Kanyinda
+ * @version 1.0
+ */
 public class LexicalAnalyzer {
     private final List<String> inputList;
     private final ArrayList<Token> tokens;
@@ -129,9 +133,6 @@ public class LexicalAnalyzer {
 
         token.append(currentChar);
         reader.nextCharForward();
-
-        // Si un chiffre est suivi immediatemment d'une lettre, on lance une exception  
-        
 
         // Si on est pas à la fin de la ligne et que le caractère courant est une suite
         // de chiffre

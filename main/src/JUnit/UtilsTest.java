@@ -6,6 +6,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Josue Lubaki
+ * @version 1.0
+ */
 class UtilsTest {
 
     @ParameterizedTest

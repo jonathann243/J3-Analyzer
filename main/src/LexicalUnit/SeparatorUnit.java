@@ -4,6 +4,10 @@ import Enums.SeparatorEnum;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
+/**
+ * @author Jonathan Kanyinda
+ * @version 1.0
+ */
 @IEntity(typeModel = SeparatorUnit.class)
 public class SeparatorUnit implements ILexicalUnit {
 

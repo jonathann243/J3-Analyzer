@@ -3,6 +3,10 @@ package LexicalUnit;
 import LexicalUnit.Interface.IEntity;
 import LexicalUnit.Interface.ILexicalUnit;
 
+/**
+ * @author Jonathan Kanyinda
+ * @version 1.0
+ */
 @IEntity(typeModel = NumberUnit.class)
 public class NumberUnit implements ILexicalUnit {
 
