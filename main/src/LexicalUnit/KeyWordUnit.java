@@ -29,7 +29,7 @@ public class KeyWordUnit implements ILexicalUnit {
     public static Boolean isKeyWord(String str) {
 
         for (KeyWordEnum keyWord : KeyWordEnum.values()) {
-            if (keyWord.getStr().equals(str))
+            if (keyWord.getKeyWord().equals(str))
                 return true;
         }
 

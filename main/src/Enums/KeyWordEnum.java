@@ -8,14 +8,14 @@ public enum KeyWordEnum {
 
     PROCEDURE("Procedure"), FIN_PROCEDURE("Fin_Procedure"), DECLARE("declare"), ENTIER("entier"), REEL("reel");
 
-    private String str;
+    private final String keyWord;
 
     KeyWordEnum(String str) {
-        this.str = str;
+        this.keyWord = str;
     }
 
-    public String getStr() {
-        return str;
+    public String getKeyWord() {
+        return keyWord;
     }
 
 }

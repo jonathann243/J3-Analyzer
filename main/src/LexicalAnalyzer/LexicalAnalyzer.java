@@ -79,6 +79,7 @@ public class LexicalAnalyzer {
 
         System.out.println("J'ai fini, voici les contenues de la liste des tokens");
         tokens.forEach(m -> System.out.print(m.getStrToken() + " "));
+        System.out.println();
     }
 
     /**
