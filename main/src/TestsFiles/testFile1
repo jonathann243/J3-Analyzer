@@ -1,9 +1,9 @@
 Procedure calcul
     declare a : entier;
-    declare b : entier;
+    declare b : reel;
 
-    a = 500
-    6popo =- 2
-    a = 6 - b
-    
-Fin_Procedure
+    a = 7;
+    b = a - 1;
+    a = 20 / ( b + a - 6)
+
+Fin_Procedure calcul

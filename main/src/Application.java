@@ -2,6 +2,7 @@ import java.util.List;
 
 import ExceptionCustom.LexicalAnalyzerException;
 import LexicalAnalyzer.LexicalAnalyzer;
+import SyntaxicAnalyzer.SyntaxicAnalyzer;
 import Utilitaire.Utils;
 import views.Menu;
 
@@ -29,13 +30,15 @@ public class Application {
             List<String> allLinesFile = Utils.readFile(path);
 
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             // Lancement de l'analyse Lexicale
             startLexicalAnalyzer(allLinesFile);
+
+
         }
     }
 
@@ -52,6 +55,9 @@ public class Application {
             // Début du traitement d'analyse lexicale
             LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(inputList);
             lexicalAnalyzer.start();
+
+            SyntaxicAnalyzer syntaxicAnalyzer = new SyntaxicAnalyzer(lexicalAnalyzer);
+            syntaxicAnalyzer.start();
         }
     }
 }
