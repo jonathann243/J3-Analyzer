@@ -81,18 +81,15 @@ public class SyntaxicAnalyzer {
     }
 
     /**
-     * Methode qui permet de vérifier si la procédure commence avec le mot clé
+     * Methode qui permet de vérifier si la declaration commence avec le mot clé
      * "declare"
      */
     private void declaration() {
 
         // vérifier que le mot clé du debut est "declare"
         if (tokenReader.nextToken().getStrToken().equals(KeyWordEnum.DECLARE.getKeyWord())) {
-
             variable();
-
             grammarManager.addVariable(tokenReader.getCurrentToken().getStrToken());
-
             checkDoublePoint();
         } else {
             System.out.println("Erreur : 'declare' attendu");
@@ -100,7 +97,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
-    // Méthode qui vérifie si le token courant est un ":"
+    /**
+     * Methode qui permet de vérifier le prochain token est (:)
+     */
     private void checkDoublePoint() {
         if (tokenReader.nextToken().getStrToken()
                 .equals(String.valueOf(SeparatorEnum.DOUBLEPOINT.getSeparator()))) {
@@ -114,7 +113,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
-    // Méthode qui vérifie si le token courant est un ";"
+    /**
+     * Methode qui permet de vérifier le prochain token est un SEMICOLON (;)
+     */
     private void checkSemicolon() {
         if (tokenReader.nextToken().getStrToken()
                 .equals(String.valueOf(SeparatorEnum.SEMICOLON.getSeparator()))) {
@@ -125,6 +126,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
+    /**
+     * Methode qui permet de vérifier si le prochain token est une variable
+     */
     private void variable() {
         if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)) {
            // traitement correct
@@ -134,6 +138,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
+    /**
+     * Methode qui permet de vérifier le type de la variable
+     */
     private void checkType() {
         if (tokenReader.nextToken().getStrToken().equals(KeyWordEnum.ENTIER.getKeyWord())
                 || tokenReader.getCurrentToken().getStrToken().equals(KeyWordEnum.REEL.getKeyWord())) {
@@ -147,6 +154,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
+    /**
+     * Methode qui permet de vérifier si le prochain token est une nouvelle declaration ou non
+     */
     private void other_declarations() {
         if (tokenReader.nextToken().getStrToken().equals(KeyWordEnum.DECLARE.getKeyWord())) {
             tokenReader.moveCursorBack();
@@ -177,7 +187,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
-
+    /**
+     * Methode qui permet de vérifier la sémantique des instructions
+     */
     private void instruction_affectation() {
         variable();
 
@@ -212,6 +224,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
+    /**
+     * Methode qui permet de vérifier les expressions arithmétiques
+     */
     private void expression_arithmetique() {
         terme();
 
@@ -232,6 +247,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
+    /**
+     * Methode qui permet de vérifier la grammaire concernant les termes
+     */
     private void terme() {
         facteur();
 
@@ -251,6 +269,9 @@ public class SyntaxicAnalyzer {
         }
     }
 
+    /**
+     * Methode qui permet de vérifier la grammaire concernant le facteur
+     */
     private void facteur() {
         tokenReader.moveCursorForward();
 

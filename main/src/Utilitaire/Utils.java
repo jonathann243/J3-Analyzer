@@ -135,10 +135,10 @@ public class Utils {
     /* Copyright */
     public static void copyright() {
         System.out.println("╔═════════════════════════════════════════════════════════════╗");
-        System.out.println("║ \tCopyright 2021 - Toute Reproduction Interdite ©       ║");
+        System.out.println("║ \t    Copyright 2021 - Toute Reproduction Interdite ©       ║");
         System.out.println("║ @Authors : Josue Lubaki & Jonathan Kanyinda & Jordan Kuibia ║");
         System.out.println("╚═════════════════════════════════════════════════════════════╝");
-        System.exit(1);
+        Utils.closeScanner();
     }
 
     /**
@@ -148,15 +148,27 @@ public class Utils {
      * @return List<String>
      */
     public static List<String> readFile(String fileName) {
+        String path = null;
+
+        if(Character.isDigit(fileName.charAt(0))){
+            path = "main/src/TestsFiles/testFile" + fileName.charAt(0);
+        }
+        else if(Character.isLetter(fileName.charAt(0))){
+            path = "main/src/TestsFiles/" + fileName;
+        }
+
         List<String> lines = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            assert path != null;
+            BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
             br.close();
         } catch (FileNotFoundException e) {
+            System.out.println("Le fichier \"" + fileName + "\" est introuvable, assurez-vous de l'avoir placé dans le dossier " +
+                    "'TestsFiles'");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
