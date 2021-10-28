@@ -7,8 +7,11 @@ public enum SyntaxicAnalyzerExceptionEnum {
     FIN_PROCEDURE_ERROR(
             "Erreur Syntaxic (PROCEDURE-NoCOMPLETE) : Mot clé '" + KeyWordEnum.FIN_PROCEDURE.getKeyWord() + "' manquant"
     ),
-    PROCEDURE_BEGIN_ERROR(
-            "Erreur Syntaxic (PROCEDURE-BEGIN_ERROR) : Mot clé '" + KeyWordEnum.PROCEDURE.getKeyWord() + "' manquant"
+    PROCEDURE_MISSING(
+            "Erreur Syntaxic (PROCEDURE-MISSING) : Mot clé '" + KeyWordEnum.PROCEDURE.getKeyWord() + "' manquant"
+    ),
+    IDENTIFICATOR_SAME_KEYWORDS(
+            "Erreur Syntaxic (PROCEDURE-SAME-KEYWORDS) : Votre identificateur n'est pas correct, car il est un mot clé du langage / Problème"
     ),
     DECLARE_MISSING(
             "Erreur Syntaxic (PROCEDURE-MISSING) : Mot clé '" + KeyWordEnum.DECLARE.getKeyWord() + "' manquant"
@@ -35,7 +38,7 @@ public enum SyntaxicAnalyzerExceptionEnum {
             "Erreur Syntaxic (TYPE-MISSING) : Une parenthèse fermante est attendu"
     ),
     AFFECTATION_ERROR(
-            "Erreur Syntaxic (AFFECTATION-ERROR) : On ne peut affecter un resultat reel à une vriable de type entier"
+            "Erreur Syntaxic (AFFECTATION-ERROR) : On ne peut affecter un résultat reel à une variable de type entier"
     );
 
 

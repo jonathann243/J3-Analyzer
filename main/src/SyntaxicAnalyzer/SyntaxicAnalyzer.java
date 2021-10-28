@@ -37,10 +37,17 @@ public class SyntaxicAnalyzer {
     private void procedure() throws SyntaxicAnalyzerException {
         // vérifier que le mot clé du debut est "Procédure"
         if (tokenReader.getCurrentToken().getStrToken().equals(KeyWordEnum.PROCEDURE.getKeyWord())) {
-            if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class))
+            if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)) {
                 grammarManager.setProcedureName(tokenReader.getCurrentToken().getStrToken());
-            else
-                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_MISSING, tokenReader.getCurrentToken().getLineNumber());
+            }
+            else {
+                isKeyWordSyntaxic();
+                try{
+                    throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_MISSING, tokenReader.getCurrentToken().getLineNumber());
+                }catch(SyntaxicAnalyzerException e){
+                    e.printStackTrace();
+                }
+            }
 
             // vérifier que le mot clé suivant est une declaration (des declarations)
             declarations();
@@ -58,15 +65,36 @@ public class SyntaxicAnalyzer {
                     System.out.print(YELLOW_BOLD_BRIGHT  + "ANALYSE SYNTAXIQUE :" + RESET);
                     System.out.println(GREEN_BOLD_BRIGHT   + " Le Programme est correct " + RESET);
                 } else {
-                    // alert nom de la procedure est different
-                    throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.PROCEDURE_NON_MATCH, tokenReader.getCurrentToken().getLineNumber());
+                    isKeyWordSyntaxic();
+                    try {
+                        // alert nom de la procedure est different
+                        throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.PROCEDURE_NON_MATCH, tokenReader.getCurrentToken().getLineNumber());
+                    }catch(SyntaxicAnalyzerException e){
+                        e.printStackTrace();
+                    }
+
                 }
             } else {
                 throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.FIN_PROCEDURE_ERROR, tokenReader.getCurrentToken().getLineNumber());
             }
         } else {
-            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.PROCEDURE_BEGIN_ERROR, tokenReader.getCurrentToken().getLineNumber());
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.PROCEDURE_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
+    }
+
+    /**
+     * Méthode qui vérifie si le token courant un mot clé
+     */
+    public void isKeyWordSyntaxic() throws SyntaxicAnalyzerException {
+        try {
+            // Vérifier si l'identificateur courant est un mot clé
+            if(isKeyWord(tokenReader.getCurrentToken().getStrToken())){
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_SAME_KEYWORDS, tokenReader.getCurrentToken().getLineNumber());
+            }
+        }catch(SyntaxicAnalyzerException e){
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -89,7 +117,11 @@ public class SyntaxicAnalyzer {
             grammarManager.addVariable(tokenReader.getCurrentToken().getStrToken());
             checkDoublePoint();
         } else {
-            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.DECLARE_MISSING, tokenReader.getCurrentToken().getLineNumber());
+            try{
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.DECLARE_MISSING, tokenReader.getCurrentToken().getLineNumber());
+            }catch(SyntaxicAnalyzerException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -104,7 +136,11 @@ public class SyntaxicAnalyzer {
 
             checkSemicolon();
         } else {
-            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.DOUBLEPOINT_MISSING, tokenReader.getCurrentToken().getLineNumber());
+            try{
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.DOUBLEPOINT_MISSING, tokenReader.getCurrentToken().getLineNumber());
+            }catch(SyntaxicAnalyzerException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -112,11 +148,9 @@ public class SyntaxicAnalyzer {
      * Methode qui permet de vérifier le prochain token est un SEMICOLON (;)
      */
     private void checkSemicolon() throws SyntaxicAnalyzerException {
-        if (tokenReader.nextToken().getStrToken()
+        if (!tokenReader.nextToken().getStrToken()
                 .equals(String.valueOf(SeparatorEnum.SEMICOLON.getSeparator()))) {
-            // traitement correct
-        } else {
-            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.SEMICOLON_MISSING, tokenReader.getCurrentToken().getLineNumber());
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.SEMICOLON_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
@@ -124,10 +158,13 @@ public class SyntaxicAnalyzer {
      * Methode qui permet de vérifier si le prochain token est une variable
      */
     private void variable() throws SyntaxicAnalyzerException {
-        if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)) {
-           // traitement correct
-        } else {
-            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_MISSING, tokenReader.getCurrentToken().getLineNumber());
+        if (!tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)) {
+            isKeyWordSyntaxic();
+            try{
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_MISSING, tokenReader.getCurrentToken().getLineNumber());
+            }catch(SyntaxicAnalyzerException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -194,10 +231,14 @@ public class SyntaxicAnalyzer {
                     .equals(String.valueOf(SeparatorEnum.EQUALITY.getSeparator()))) {
                 expression_arithmetique();
             } else {
-                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.EQUALITY_MISSING, tokenReader.getCurrentToken().getLineNumber());
+                try{
+                    throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.EQUALITY_MISSING, tokenReader.getCurrentToken().getLineNumber());
+                }catch(SyntaxicAnalyzerException e){
+                    e.printStackTrace();
+                }
             }
 
-            if(!grammarManager.isAffectationTypeSupported()){
+            if(!grammarManager.isAffectationTypeSupported()) {
                 throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.AFFECTATION_ERROR, tokenReader.getCurrentToken().getLineNumber());
             }
         } else {
@@ -291,7 +332,11 @@ public class SyntaxicAnalyzer {
             if (!tokenReader.nextToken().getStrToken()
                     .equals(String.valueOf(SeparatorEnum.BRACKETCLOSE.getSeparator()))) {
                 tokenReader.moveCursorBack();
-                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.BRACKETCLOSE_MISSING, tokenReader.getCurrentToken().getLineNumber());
+                try{
+                    throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.BRACKETCLOSE_MISSING, tokenReader.getCurrentToken().getLineNumber());
+                }catch(SyntaxicAnalyzerException e){
+                    e.printStackTrace();
+                }
             }
         }
     }

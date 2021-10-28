@@ -10,6 +10,7 @@ import LexicalUnit.SeparatorUnit;
 import Utilitaire.Utils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static Utilitaire.Utils.*;
@@ -22,12 +23,14 @@ public class LexicalAnalyzer {
     private final List<String> inputList;
     private final ArrayList<Token> tokens;
     private final LineReader reader;
+    private final HashSet<String> repeatExecution;
     private int lineNumber = 0; // numéro de ligne de chaque instruction
 
     public LexicalAnalyzer(List<String> inputList) {
         this.inputList = inputList;
         this.tokens = new ArrayList<>();
         this.reader = new LineReader();
+        this.repeatExecution = new HashSet<>();
     }
 
     /**
@@ -132,11 +135,19 @@ public class LexicalAnalyzer {
      * @return true si l'utilisateur decide de continuer le programme
      */
     private boolean recoverPasswords(String identificator) {
-        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez un identificateur (" + identificator
-                + ") qui a plus de 8 caractères");
-        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Voulez-vous continuer l'analyse ? L'identificateur sera réduit à 8 max (O/N)");
 
-        if(optionChosenByUser()){
+        if(repeatExecution.isEmpty()){
+            System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez un identificateur ("
+                    + GREEN_BOLD_BRIGHT + identificator + RESET + ") qui a plus de 8 caractères");
+            System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Voulez-vous continuer l'analyse ? L'identificateur sera réduit à 8 caractères max ("
+                    + YELLOW_BOLD_BRIGHT + "O/N" + RESET +")");
+        }
+
+        if(repeatExecution.contains(identificator)){
+            troncIdentificator(identificator);
+            return true;
+        }
+        else if(optionChosenByUser()){
             troncIdentificator(identificator);
             return true;
         }
@@ -149,6 +160,7 @@ public class LexicalAnalyzer {
      * @param identificator identificateur à réduire
      */
     private void troncIdentificator(String identificator) {
+        repeatExecution.add(identificator);
         identificator = identificator.substring(0,8);
         IdentificatorUnit identificatorUnit = new IdentificatorUnit(identificator);
         Token token = new Token(lineNumber, identificatorUnit);
@@ -189,25 +201,18 @@ public class LexicalAnalyzer {
     }
 
     private boolean optionChosenByUser(){
-        char ch;
+        String ch;
         boolean exit = false;
 
         while(!exit){
-            ch = Utils.getInputOnlyChar(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "$> ");
+            ch = String.valueOf(Utils.getInputOnlyChar(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "$> "));
 
-            switch(ch){
-                case 'o' : {
-                    return true;
-                }
-                case 'n' :{
-                    exit = true;
-                }
-                default : {
-                    System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez le choix entre \"O\" ou \"N\" ");
-                }
+            if(ch.equalsIgnoreCase("o")) {
+                return true;
             }
+            else
+                exit = true;
         }
-
         return false;
     }
 
@@ -217,11 +222,18 @@ public class LexicalAnalyzer {
      * @return true si l'utilisateur decide de continuer le programme
      */
     private boolean recoverNumber(String number) {
-        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez saisit un nombre (" + number
-                + ") qui n'est pas reconnue comme un entier ou reel");
-        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Voulez-vous continuer l'analyse ? On ne considèrera que la partie entière (O/N)");
+        if(repeatExecution.isEmpty()){
+            System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez saisit un nombre ("
+                    + GREEN_BOLD_BRIGHT + number + RESET + ") qui n'est pas reconnue comme un entier ou reel");
+            System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Voulez-vous continuer l'analyse ? On ne considèrera que la partie entière ("
+                    + YELLOW_BOLD_BRIGHT + "O/N" + RESET +")");
+        }
 
-        if(optionChosenByUser()){
+        if(repeatExecution.contains(number)){
+            takeNumberManage(number);
+            return true;
+        }
+        else if(optionChosenByUser()){
             takeNumberManage(number);
             return true;
         }
@@ -234,6 +246,7 @@ public class LexicalAnalyzer {
      * @param number le nombre à convertir
      */
     private void takeNumberManage(String number) {
+        repeatExecution.add(number);
         number = number.split("\\.")[0];
         NumberUnit numberUnit = new NumberUnit(number);
         Token token = new Token(lineNumber, numberUnit);
