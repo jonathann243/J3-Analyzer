@@ -77,9 +77,10 @@ public class LexicalAnalyzer {
             } while (!reader.isEOL());
         }
 
-        System.out.println("J'ai fini, voici les contenues de la liste des tokens");
+        System.out.print( YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE" + RESET);
+        System.out.print(" : { " + GREEN_BOLD);
         tokens.forEach(m -> System.out.print(m.getStrToken() + " "));
-        System.out.println();
+        System.out.println(RESET + " }");
     }
 
     /**
