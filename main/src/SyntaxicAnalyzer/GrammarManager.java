@@ -13,8 +13,8 @@ import Enums.KeyWordEnum;
 public class GrammarManager {
     private String procedureName;
     private List<Variable> variables;
-    private String instructionAtLeftType;
-    private String instructionAtRightType;
+    private String instructionAtLeftType = "";
+    private String instructionAtRightType = "";
 
     public GrammarManager() {
         this.variables = new ArrayList<>();
