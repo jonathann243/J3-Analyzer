@@ -6,6 +6,10 @@ import java.util.List;
 
 import Enums.KeyWordEnum;
 
+/**
+ * @author Jonathan Kanyinda
+ * @version 1.0
+ */
 public class GrammarManager {
     private String procedureName;
     private List<Variable> variables;

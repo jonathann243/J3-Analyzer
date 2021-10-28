@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -53,8 +54,24 @@ public class Utils {
             System.out.print(message);
             System.out.print("\n\t $> ");
             response = scanner.nextLine();
-        } while (!isDigit(response));
+        } while (!isDigit(response, true));
         return Integer.parseInt(response);
+    }
+
+    /**
+     * Methode qui permet de récupérer l'input en char entré par l'utilisateur
+     * N'accepte que le char (le caractère)
+     *
+     * @param message Le message à afficher à l'utilisateur
+     * @return int
+     */
+    public static char getInputOnlyChar(String message) {
+        char ch;
+        do {
+            System.out.print(message);
+            ch =  scanner.nextLine().toLowerCase().charAt(0);
+        } while (!isLetter(ch));
+        return ch;
     }
 
     /**
@@ -62,16 +79,22 @@ public class Utils {
      * paramètre est un chiffre
      * 
      * @param str La chaine de caractère à vérifier
-     * 
+     * @param opt si true, on vérifie de manière stricte [0-9], sinon on vérifie s'il peut être entier ou reel
      * @return boolean
      */
-    public static boolean isDigit(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
+    public static boolean isDigit(String str, boolean opt) {
+        if(opt){
+            for (int i = 0; i < str.length(); i++) {
+                if (!Character.isDigit(str.charAt(i))) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        else{
+            // regex pour vérifier si c'et un entier ou reel
+            return str.matches("[0-9]{1,13}(\\.[0-9]+)?");
+        }
     }
 
     /**
@@ -91,8 +114,6 @@ public class Utils {
     public static boolean isLetter(char ch){
         return Character.isLetter(ch);
     }
-
-
 
     /**
      * Methode qui vérifie si le character passé en paramètre est un opérateur

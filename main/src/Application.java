@@ -34,7 +34,7 @@ public class Application {
                 Utils.copyright();
                 exit = true;
             }
-            else if(indice == 7){
+            else if(indice == 8){
                 nameFile = Utils.getInput("\n\t " + YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Veuillez saisir le nom de votre fichier");
                 openTestFile(nameFile);
             }

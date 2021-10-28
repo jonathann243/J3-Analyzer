@@ -7,6 +7,7 @@ import LexicalUnit.KeyWordUnit;
 import LexicalUnit.NumberUnit;
 import LexicalUnit.OperatorUnit;
 import LexicalUnit.SeparatorUnit;
+import Utilitaire.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,10 +120,39 @@ public class LexicalAnalyzer {
             Token sToken = new Token(lineNumber, identificator);
             tokens.add(sToken);
         } else {
-            // TODO Tenter de récupérer l'erreur, sinon
-            throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.IDENTIFIANT_ERROR, lineNumber);
+            if(!recoverPasswords(token.toString()))
+                throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.IDENTIFIANT_ERROR, lineNumber);
         }
 
+    }
+
+    /**
+     * Methode qui permet de récupérer l'erreur, au cas où le nombre de caractère est supériieur à 8
+     * @param identificator l'identifiant à évaluer
+     * @return true si l'utilisateur decide de continuer le programme
+     */
+    private boolean recoverPasswords(String identificator) {
+        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez un identificateur (" + identificator
+                + ") qui a plus de 8 caractères");
+        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Voulez-vous continuer l'analyse ? L'identificateur sera réduit à 8 max (O/N)");
+
+        if(optionChosenByUser()){
+            troncIdentificator(identificator);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Methode qui permet de couper l'identificateur passé en paramètre sur 8 caractères maximum
+     * @param identificator identificateur à réduire
+     */
+    private void troncIdentificator(String identificator) {
+        identificator = identificator.substring(0,8);
+        IdentificatorUnit identificatorUnit = new IdentificatorUnit(identificator);
+        Token token = new Token(lineNumber, identificatorUnit);
+        tokens.add(token);
     }
 
     /**
@@ -147,14 +177,67 @@ public class LexicalAnalyzer {
         }
 
         // Vérifier si le token construit est un entier
-        if (isDigit(token.toString())) {
+        if (isDigit(token.toString(), false)) {
             NumberUnit integer = new NumberUnit(token.toString());
             Token sToken = new Token(lineNumber, integer);
             tokens.add(sToken);
         } else {
             // TODO Tenter de récupérer l'erreur, sinon
-            throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.DIGIT_ERROR, lineNumber);
+            if(!recoverNumber(token.toString()))
+                throw new LexicalAnalyzerException(LexicalAnalyzerExceptionEnums.DIGIT_ERROR, lineNumber);
         }
+    }
+
+    private boolean optionChosenByUser(){
+        char ch;
+        boolean exit = false;
+
+        while(!exit){
+            ch = Utils.getInputOnlyChar(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "$> ");
+
+            switch(ch){
+                case 'o' : {
+                    return true;
+                }
+                case 'n' :{
+                    exit = true;
+                }
+                default : {
+                    System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez le choix entre \"O\" ou \"N\" ");
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Methode qui permet de récupérer l'erreur, au cas où le nombre fournit par l'utilisateur n'est ni un entier ni un reel
+     * @param number le nombre à évaluer
+     * @return true si l'utilisateur decide de continuer le programme
+     */
+    private boolean recoverNumber(String number) {
+        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Vous avez saisit un nombre (" + number
+                + ") qui n'est pas reconnue comme un entier ou reel");
+        System.out.println(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Voulez-vous continuer l'analyse ? On ne considèrera que la partie entière (O/N)");
+
+        if(optionChosenByUser()){
+            takeNumberManage(number);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Méthode qui permet de convertir le nombre passé en paramètre en entier valide
+     * @param number le nombre à convertir
+     */
+    private void takeNumberManage(String number) {
+        number = number.split("\\.")[0];
+        NumberUnit numberUnit = new NumberUnit(number);
+        Token token = new Token(lineNumber, numberUnit);
+        tokens.add(token);
     }
 
     /**

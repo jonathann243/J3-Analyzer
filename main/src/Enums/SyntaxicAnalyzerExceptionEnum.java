@@ -2,7 +2,7 @@ package Enums;
 
 public enum SyntaxicAnalyzerExceptionEnum {
     PROCEDURE_NON_MATCH(
-            "Erreur Syntaxic (PROCEDURE-NoMATCH) : Nom de la procédure ne correspondant pas à celui declaré au debut"
+            "Erreur Syntaxic (PROCEDURE-NoMATCH) : Nom de la procédure ne correspondant pas à celui declaré au debut, problème"
     ),
     FIN_PROCEDURE_ERROR(
             "Erreur Syntaxic (PROCEDURE-NoCOMPLETE) : Mot clé '" + KeyWordEnum.FIN_PROCEDURE.getKeyWord() + "' manquant"

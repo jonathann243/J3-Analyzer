@@ -1,8 +1,5 @@
 package JUnit;
 
-import Enums.OperatorEnum;
-import LexicalAnalyzer.LexicalAnalyzer;
-import LexicalAnalyzer.LineReader;
 import LexicalAnalyzer.Token;
 import LexicalUnit.IdentificatorUnit;
 import LexicalUnit.OperatorUnit;
@@ -13,22 +10,19 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TokenReaderTest {
 
-    private static List<Token> tokens;
     private static TokenReader tokenReader;
-    private static int cursor;
     private static Token token;
 
     @BeforeAll
     public static void init(){
-        tokens = new ArrayList<>();
+        List<Token> tokens = new ArrayList<>();
         token = new Token(2, new OperatorUnit('+'));
         tokens.add(new Token(1, new IdentificatorUnit("Procedure")));
         tokens.add(token);
-        cursor = 0;
         tokenReader = new TokenReader(tokens);
     }
 

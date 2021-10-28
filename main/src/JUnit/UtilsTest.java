@@ -15,7 +15,7 @@ class UtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"12","123"})
     void isDigit(String input) {
-        assertTrue(Utils.isDigit(input), "Ne contient que les chiffres");
+        assertTrue(Utils.isDigit(input, true), "Ne contient que les chiffres");
     }
 
     @ParameterizedTest

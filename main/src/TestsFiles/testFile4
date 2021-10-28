@@ -3,7 +3,7 @@ Procedure calcul
     declare b : reel;
 
     a = 7;
-    b = a - 1;
+    b = a - 1.5;
     a = 20 / ( b + a - 6)
 
-Fin_Procedure calculatrice
+Fin_Procedure operator

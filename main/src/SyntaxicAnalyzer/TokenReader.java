@@ -3,6 +3,10 @@ package SyntaxicAnalyzer;
 import java.util.List;
 import LexicalAnalyzer.Token;
 
+/**
+ * @author Jordan Kuibia
+ * @version 1.0
+ */
 public class TokenReader {
 
     private final List<Token> tokens;
