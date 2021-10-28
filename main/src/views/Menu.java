@@ -22,7 +22,8 @@ public class Menu {
         System.out.println("\t 4. Test [incorrect] (le nom de la procédure n'est pareille que celui de la fin)");
         System.out.println("\t 5. Test [incorrect] (Manque symbole '=')");
         System.out.println("\t 6. Test [incorrect] (Fichier vide)");
-        System.out.println("\t 7. Test (Entrer le nom de votre fichier)");
+        System.out.println("\t 7. Test [incorrect] (Une parenthèse fermante manquante)");
+        System.out.println("\t 8. Test (Entrer le nom de votre fichier)");
         System.out.println("\t 0. " + RED_BOLD + "Quitter" + RESET);
     }
 

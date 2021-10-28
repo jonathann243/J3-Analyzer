@@ -1,7 +1,6 @@
 package SyntaxicAnalyzer;
 
 import Enums.*;
-import ExceptionCustom.LexicalAnalyzerException;
 import ExceptionCustom.SyntaxicAnalyzerException;
 import LexicalAnalyzer.LexicalAnalyzer;
 import LexicalUnit.IdentificatorUnit;
@@ -245,7 +244,7 @@ public class SyntaxicAnalyzer {
      * Methode qui permet de vérifier la grammaire concernant les termes
      */
     private void terme() throws SyntaxicAnalyzerException {
-        facteur();
+        factor();
 
         // Tant que le prochain token correspond à "*" ou "/", cela signique qu'il
         // encore un autre facteur à traiter
@@ -259,14 +258,14 @@ public class SyntaxicAnalyzer {
             }
 
             // il y a encore un autre facteur à traiter
-            facteur();
+            factor();
         }
     }
 
     /**
      * Methode qui permet de vérifier la grammaire concernant le facteur
      */
-    private void facteur() throws SyntaxicAnalyzerException {
+    private void factor() throws SyntaxicAnalyzerException {
         tokenReader.moveCursorForward();
 
         if (tokenReader.getCurrentToken().getClassToken().equals(IdentificatorUnit.class)) {
@@ -289,15 +288,11 @@ public class SyntaxicAnalyzer {
 
             expression_arithmetique();
 
-            if (tokenReader.nextToken().getStrToken()
+            if (!tokenReader.nextToken().getStrToken()
                     .equals(String.valueOf(SeparatorEnum.BRACKETCLOSE.getSeparator()))) {
-                // Traitement correct
-            } else {
                 tokenReader.moveCursorBack();
                 throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.BRACKETCLOSE_MISSING, tokenReader.getCurrentToken().getLineNumber());
             }
-        } else {
-            // Traitement correct
         }
     }
 }
