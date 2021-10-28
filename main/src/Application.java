@@ -20,8 +20,7 @@ public class Application {
      * @throws SyntaxicAnalyzerException lorsqu'une erreur survient lors de l'analyse syntaxique, elle catégorise l'erreur selon son type
      */
     public static void start() throws LexicalAnalyzerException, SyntaxicAnalyzerException {
-        // Affichage du menu
-        Menu.showMenu();
+
 
         // Récupération de la saisie utilisateur
         int indice = -1;
@@ -29,12 +28,14 @@ public class Application {
         boolean exit = false;
 
         while(!exit){
+            // Affichage du menu
+            Menu.showMenu();
             indice = Utils.getInputOnlyDigit("\n\tVeuillez choisir une option valide : ");
             if(indice == 0){
                 Utils.copyright();
                 exit = true;
             }
-            else if(indice == 8){
+            else if(indice == 10){
                 nameFile = Utils.getInput("\n\t " + YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Veuillez saisir le nom de votre fichier");
                 openTestFile(nameFile);
             }

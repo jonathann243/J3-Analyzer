@@ -1,11 +1,11 @@
 Procedure calcul
     declare a : entier;
     declare b : reel;
-    declare c : reel;
+    declare c : entier;
 
-    a = 7;
+    a = 7.2;
     b = a - 2.5;
-    c = b + 1;
-    c = c + b + a
+    a = b + 1;
+    c = a + b
 
 Fin_Procedure calcul

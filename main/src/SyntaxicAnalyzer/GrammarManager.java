@@ -70,7 +70,12 @@ public class GrammarManager {
     }
 
     public void setInstructionAtRightType(String type) {
-        this.instructionAtRightType = type;
+        // si l'instruction se trouvant à droite de l'égalité est un reel
+        // alors conserver le type reel
+        if(!this.instructionAtRightType.equals(KeyWordEnum.REEL.getKeyWord()))
+            this.instructionAtRightType = type;
+        else
+            this.instructionAtRightType = KeyWordEnum.REEL.getKeyWord();
     }
 
     /**
