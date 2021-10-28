@@ -1,11 +1,13 @@
 package SyntaxicAnalyzer;
 
-import Enums.KeyWordEnum;
-import Enums.OperatorEnum;
-import Enums.SeparatorEnum;
+import Enums.*;
+import ExceptionCustom.LexicalAnalyzerException;
+import ExceptionCustom.SyntaxicAnalyzerException;
 import LexicalAnalyzer.LexicalAnalyzer;
 import LexicalUnit.IdentificatorUnit;
 import LexicalUnit.NumberUnit;
+
+import static Utilitaire.Utils.*;
 
 
 /**
@@ -25,7 +27,7 @@ public class SyntaxicAnalyzer {
     /**
      * Methode qui permet de lancer l'analyse syntaxique
      */
-    public void start() {
+    public void start() throws SyntaxicAnalyzerException {
         procedure();
     }
 
@@ -33,17 +35,13 @@ public class SyntaxicAnalyzer {
      * Methode qui permet de vérifier si la procédure commence avec le mot clé
      * "Procedure"
      */
-    private void procedure() {
+    private void procedure() throws SyntaxicAnalyzerException {
         // vérifier que le mot clé du debut est "Procédure"
         if (tokenReader.getCurrentToken().getStrToken().equals(KeyWordEnum.PROCEDURE.getKeyWord())) {
-            if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)) {
-                // Sauvegarder l'identificateur dans une collection
+            if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class))
                 grammarManager.setProcedureName(tokenReader.getCurrentToken().getStrToken());
-
-            } else {
-                System.out.println("Erreur : Identificateur attendu - 44");
-                // TODO exception
-            }
+            else
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_MISSING, tokenReader.getCurrentToken().getLineNumber());
 
             // vérifier que le mot clé suivant est une declaration (des declarations)
             declarations();
@@ -57,25 +55,25 @@ public class SyntaxicAnalyzer {
                 if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)
                         && grammarManager.isSameProcedure(tokenReader.getCurrentToken().getStrToken())) {
                     // Fin programme
-                    System.out.println("Fin programme");
+                    System.out.println();
+                    System.out.print(YELLOW_BOLD_BRIGHT  + "ANALYSE SYNTAXIQUE :" + RESET);
+                    System.out.println(GREEN_BOLD_BRIGHT   + " Le Programme est correct " + RESET);
                 } else {
                     // alert nom de la procedure est different
-                    System.out.println("Erreur : Nom de la procédure ne correspondant pas à celui declaré au debut !");
+                    throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.PROCEDURE_NON_MATCH, tokenReader.getCurrentToken().getLineNumber());
                 }
             } else {
-                System.out.println("Erreur : mot 'Fin_Procedure' attendu - 66");
-                // TODO exception
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.FIN_PROCEDURE_ERROR, tokenReader.getCurrentToken().getLineNumber());
             }
         } else {
-            System.out.println("Erreur : mot 'Procedure' attendu");
-            // TODO exception
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.PROCEDURE_BEGIN_ERROR, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
     /**
      * Début traitement des déclarations
      */
-    private void declarations() {
+    private void declarations() throws SyntaxicAnalyzerException {
         declaration();
         other_declarations();
     }
@@ -84,7 +82,7 @@ public class SyntaxicAnalyzer {
      * Methode qui permet de vérifier si la declaration commence avec le mot clé
      * "declare"
      */
-    private void declaration() {
+    private void declaration() throws SyntaxicAnalyzerException {
 
         // vérifier que le mot clé du debut est "declare"
         if (tokenReader.nextToken().getStrToken().equals(KeyWordEnum.DECLARE.getKeyWord())) {
@@ -92,15 +90,14 @@ public class SyntaxicAnalyzer {
             grammarManager.addVariable(tokenReader.getCurrentToken().getStrToken());
             checkDoublePoint();
         } else {
-            System.out.println("Erreur : 'declare' attendu");
-            // TODO exception
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.DECLARE_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
     /**
      * Methode qui permet de vérifier le prochain token est (:)
      */
-    private void checkDoublePoint() {
+    private void checkDoublePoint() throws SyntaxicAnalyzerException {
         if (tokenReader.nextToken().getStrToken()
                 .equals(String.valueOf(SeparatorEnum.DOUBLEPOINT.getSeparator()))) {
 
@@ -108,40 +105,37 @@ public class SyntaxicAnalyzer {
 
             checkSemicolon();
         } else {
-            System.out.println("Erreur : ':' attendu");
-            // TODO exception
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.DOUBLEPOINT_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
     /**
      * Methode qui permet de vérifier le prochain token est un SEMICOLON (;)
      */
-    private void checkSemicolon() {
+    private void checkSemicolon() throws SyntaxicAnalyzerException {
         if (tokenReader.nextToken().getStrToken()
                 .equals(String.valueOf(SeparatorEnum.SEMICOLON.getSeparator()))) {
             // traitement correct
         } else {
-            System.out.println("Erreur : ';' attendu");
-            // TODO exception
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.SEMICOLON_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
     /**
      * Methode qui permet de vérifier si le prochain token est une variable
      */
-    private void variable() {
+    private void variable() throws SyntaxicAnalyzerException {
         if (tokenReader.nextToken().getClassToken().equals(IdentificatorUnit.class)) {
            // traitement correct
         } else {
-            System.out.println("Erreur : Identificateur attendu - 132");
-            // TODO exception
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.IDENTIFICATOR_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
     /**
      * Methode qui permet de vérifier le type de la variable
      */
-    private void checkType() {
+    private void checkType() throws SyntaxicAnalyzerException {
         if (tokenReader.nextToken().getStrToken().equals(KeyWordEnum.ENTIER.getKeyWord())
                 || tokenReader.getCurrentToken().getStrToken().equals(KeyWordEnum.REEL.getKeyWord())) {
 
@@ -149,15 +143,14 @@ public class SyntaxicAnalyzer {
             grammarManager.addTypeRecentVariable(tokenReader.getCurrentToken().getStrToken());
 
         } else {
-            System.out.println("Erreur : Type attendu");
-            // TODO exception
+            throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.TYPE_MISSING, tokenReader.getCurrentToken().getLineNumber());
         }
     }
 
     /**
      * Methode qui permet de vérifier si le prochain token est une nouvelle declaration ou non
      */
-    private void other_declarations() {
+    private void other_declarations() throws SyntaxicAnalyzerException {
         if (tokenReader.nextToken().getStrToken().equals(KeyWordEnum.DECLARE.getKeyWord())) {
             tokenReader.moveCursorBack();
             declarations();
@@ -170,7 +163,7 @@ public class SyntaxicAnalyzer {
     /**
      * Debut traitement des instructions
      */
-    private void instructions_affectation() {
+    private void instructions_affectation() throws SyntaxicAnalyzerException {
         instruction_affectation();
 
         // Tant que le prochain token corrspond au ";", cela signifie qu'il y a encore
@@ -190,7 +183,7 @@ public class SyntaxicAnalyzer {
     /**
      * Methode qui permet de vérifier la sémantique des instructions
      */
-    private void instruction_affectation() {
+    private void instruction_affectation() throws SyntaxicAnalyzerException {
         variable();
 
         Variable varLeft = grammarManager.getVariableByName(tokenReader.getCurrentToken().getStrToken());
@@ -202,24 +195,25 @@ public class SyntaxicAnalyzer {
                     .equals(String.valueOf(SeparatorEnum.EQUALITY.getSeparator()))) {
                 expression_arithmetique();
             } else {
-                System.out.println("Erreur : '=' attendu");
-                // TODO exception
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.EQUALITY_MISSING, tokenReader.getCurrentToken().getLineNumber());
             }
 
             if(!grammarManager.isAffectationTypeSupported()){
-                System.out.println("resultat reel à un entier");
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.AFFECTATION_ERROR, tokenReader.getCurrentToken().getLineNumber());
             }
         } else {
-            System.out.println("Erreur : Variable non déclarée - 205");
-            // TODO exception
+            try {
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.VARIABLE_NoDEFINE, tokenReader.getCurrentToken().getLineNumber());
+            }catch(SyntaxicAnalyzerException e){
+                e.printStackTrace();
+            }
 
-            // Récupération sur erreur en cas de variable non déclarée
+//        Récupération sur erreur en cas de variable non déclarée
             if (tokenReader.nextToken().getStrToken()
                     .equals(String.valueOf(SeparatorEnum.EQUALITY.getSeparator()))) {
                 expression_arithmetique();
             } else {
-                System.out.println("Erreur : '=' attendu");
-                // TODO exception
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.EQUALITY_MISSING, tokenReader.getCurrentToken().getLineNumber());
             }
         }
     }
@@ -227,7 +221,7 @@ public class SyntaxicAnalyzer {
     /**
      * Methode qui permet de vérifier les expressions arithmétiques
      */
-    private void expression_arithmetique() {
+    private void expression_arithmetique() throws SyntaxicAnalyzerException {
         terme();
 
         // Tant que le prochain token correspond à "+" ou "-", cela signifie qu'il
@@ -250,7 +244,7 @@ public class SyntaxicAnalyzer {
     /**
      * Methode qui permet de vérifier la grammaire concernant les termes
      */
-    private void terme() {
+    private void terme() throws SyntaxicAnalyzerException {
         facteur();
 
         // Tant que le prochain token correspond à "*" ou "/", cela signique qu'il
@@ -272,7 +266,7 @@ public class SyntaxicAnalyzer {
     /**
      * Methode qui permet de vérifier la grammaire concernant le facteur
      */
-    private void facteur() {
+    private void facteur() throws SyntaxicAnalyzerException {
         tokenReader.moveCursorForward();
 
         if (tokenReader.getCurrentToken().getClassToken().equals(IdentificatorUnit.class)) {
@@ -283,8 +277,7 @@ public class SyntaxicAnalyzer {
             if (varRight != null) {
                 grammarManager.setInstructionAtRightType(varRight.getStrType());
             } else {
-                System.out.println("Erreur : Variable non déclarée - 269");
-                // TODO exception
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.VARIABLE_NoDEFINE, tokenReader.getCurrentToken().getLineNumber());
             }
 
         } else if (tokenReader.getCurrentToken().getClassToken().equals(NumberUnit.class)) {
@@ -301,8 +294,7 @@ public class SyntaxicAnalyzer {
                 // Traitement correct
             } else {
                 tokenReader.moveCursorBack();
-                System.out.println("Erreur : ')' attendu");
-                // TODO exception
+                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.BRACKETCLOSE_MISSING, tokenReader.getCurrentToken().getLineNumber());
             }
         } else {
             // Traitement correct

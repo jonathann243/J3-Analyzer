@@ -19,6 +19,13 @@ import java.util.Scanner;
  */
 public class Utils {
     static Scanner scanner = new Scanner(System.in);
+    public static final String RESET = "\033[0m";  // Text Reset
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String YELLOW_UNDERLINED = "\033[4;33m"; // YELLOW
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
 
     /**
      * Methode qui permet de récupérer les inputs en chaine de caractère entrés par
@@ -134,10 +141,10 @@ public class Utils {
 
     /* Copyright */
     public static void copyright() {
-        System.out.println("╔═════════════════════════════════════════════════════════════╗");
-        System.out.println("║ \t    Copyright 2021 - Toute Reproduction Interdite ©       ║");
-        System.out.println("║ @Authors : Josue Lubaki & Jonathan Kanyinda & Jordan Kuibia ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════╝");
+        System.out.println(YELLOW_BOLD  + "╔═════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(YELLOW_BOLD  + "║ \t    Copyright 2021 - Toute Reproduction Interdite ©       ║" + RESET);
+        System.out.println(YELLOW_BOLD  + "║ @Authors : Josue Lubaki & Jonathan Kanyinda & Jordan Kuibia ║" + RESET);
+        System.out.println(YELLOW_BOLD  + "╚═════════════════════════════════════════════════════════════╝" + RESET);
         Utils.closeScanner();
     }
 
@@ -167,8 +174,9 @@ public class Utils {
             }
             br.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Le fichier \"" + fileName + "\" est introuvable, assurez-vous de l'avoir placé dans le dossier " +
-                    "'TestsFiles'");
+            System.out.println(YELLOW_BOLD_BRIGHT  + "ANALYSE LEXICALE : " + RESET + "Le fichier \""
+                    + GREEN_BOLD + fileName + RESET + "\" est introuvable, assurez-vous de l'avoir placé dans le dossier " +
+                    YELLOW_UNDERLINED  + "'./src/TestsFiles/'" + RESET);
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
