@@ -101,8 +101,8 @@ public class ConsoleColors {
 <img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/menu.png" width="640px" height="480px" alt="menu"/>
 
 <h2>Example correct program</h2>
-<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/correct.png" alt="correct"/>
+<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/correct.png" height="420px" alt="correct"/>
 
 <h2>Example error program</h2>
-<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/error.png" alt="menu"/>
+<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/error.png" height="420px" alt="menu"/>
 
