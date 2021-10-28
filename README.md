@@ -97,3 +97,12 @@ public class ConsoleColors {
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 }
 -->
+<h2>Menu</h2>
+<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/menu.png" width="360px" height="380px" alt="menu"/>
+
+<h2>Example correct program</h2>
+<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/correct.png" width="440px" height="360px" alt="correct"/>
+
+<h2>Example error program</h2>
+<img src="https://github.com/josue-lubaki/J3-Analyzer/blob/main/screen/error.png" width="440px" height="360px" alt="menu"/>
+
