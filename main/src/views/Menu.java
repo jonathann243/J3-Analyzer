@@ -12,9 +12,9 @@ public class Menu {
      */
     public static void showMenu() {
         System.out.println("\n");
-        System.out.println(YELLOW_BOLD + "\t\t\t╔═════════════════════╗" + RESET);
-        System.out.println(YELLOW_BOLD + "\t\t\t║    MENU PRINCIPAL   ║" + RESET);
-        System.out.println(YELLOW_BOLD + "\t\t\t╚═════════════════════╝" + RESET);
+        System.out.println(YELLOW_BOLD + "\t\t\t\t\t\t╔═════════════════════╗" + RESET);
+        System.out.println(YELLOW_BOLD + "\t\t\t\t\t\t║    MENU PRINCIPAL   ║" + RESET);
+        System.out.println(YELLOW_BOLD + "\t\t\t\t\t\t╚═════════════════════╝" + RESET);
         System.out.println("\tTous les fichiers se trouvent sur le path (\"src/TestsFiles\")"
                 + "\n\t Entrer le numero correspondant au fichier à ouvrir");
         System.out.println("\t 1. Test [correct]");

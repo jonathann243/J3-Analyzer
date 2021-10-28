@@ -162,10 +162,10 @@ public class Utils {
 
     /* Copyright */
     public static void copyright() {
-        System.out.println(YELLOW_BOLD  + "╔═════════════════════════════════════════════════════════════╗" + RESET);
-        System.out.println(YELLOW_BOLD  + "║ \t    Copyright 2021 - Toute Reproduction Interdite ©       ║" + RESET);
-        System.out.println(YELLOW_BOLD  + "║ @Authors : Josue Lubaki & Jonathan Kanyinda & Jordan Kuibia ║" + RESET);
-        System.out.println(YELLOW_BOLD  + "╚═════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.println(YELLOW_BOLD  + "\t╔═════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(YELLOW_BOLD  + "\t║ \t    Copyright 2021 - Toute Reproduction Interdite ©       ║" + RESET);
+        System.out.println(YELLOW_BOLD  + "\t║ @Authors : Josue Lubaki & Jonathan Kanyinda & Jordan Kuibia ║" + RESET);
+        System.out.println(YELLOW_BOLD  + "\t╚═════════════════════════════════════════════════════════════╝" + RESET);
         Utils.closeScanner();
     }
 
