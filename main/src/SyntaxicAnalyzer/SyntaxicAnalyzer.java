@@ -317,7 +317,11 @@ public class SyntaxicAnalyzer {
             if (varRight != null) {
                 grammarManager.setInstructionAtRightType(varRight.getStrType());
             } else {
-                throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.VARIABLE_NoDEFINE, tokenReader.getCurrentToken().getLineNumber());
+                try{
+                    throw new SyntaxicAnalyzerException(SyntaxicAnalyzerExceptionEnum.VARIABLE_NoDEFINE, tokenReader.getCurrentToken().getLineNumber());
+                }catch(SyntaxicAnalyzerException e){
+                    e.printStackTrace();
+                }
             }
 
         } else if (tokenReader.getCurrentToken().getClassToken().equals(NumberUnit.class)) {

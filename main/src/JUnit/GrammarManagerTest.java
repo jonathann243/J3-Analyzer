@@ -60,8 +60,10 @@ class GrammarManagerTest {
 
     @Test
     void setInstructionAtRightType() {
+        instruction = "entier";
         grammarManager.setInstructionAtRightType(instruction);
         assertNotNull(grammarManager.getInstructionAtRightType());
+        assertEquals(KeyWordEnum.ENTIER.getKeyWord(),grammarManager.getInstructionAtRightType());
     }
 
     @Test
@@ -81,6 +83,7 @@ class GrammarManagerTest {
     void getInstructionAtRightType() {
         grammarManager.setInstructionAtRightType(instruction);
         assertNotNull(grammarManager.getInstructionAtRightType());
+        assertEquals(grammarManager.getInstructionAtRightType(),instruction);
     }
 
     @Test

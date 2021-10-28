@@ -151,7 +151,6 @@ public class LexicalAnalyzer {
             troncIdentificator(identificator);
             return true;
         }
-
         return false;
     }
 
@@ -202,18 +201,17 @@ public class LexicalAnalyzer {
 
     private boolean optionChosenByUser(){
         String ch;
-        boolean exit = false;
 
-        while(!exit){
+        while(true){
             ch = String.valueOf(Utils.getInputOnlyChar(YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "$> "));
 
             if(ch.equalsIgnoreCase("o")) {
                 return true;
             }
-            else
-                exit = true;
+            else if(ch.equalsIgnoreCase("n")){
+                return false;
+            }
         }
-        return false;
     }
 
     /**

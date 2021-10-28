@@ -36,7 +36,8 @@ public class Application {
                 exit = true;
             }
             else if(indice == 10){
-                nameFile = Utils.getInput("\n\t " + YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Veuillez saisir le nom de votre fichier");
+                nameFile = Utils.getInput("\n\t " + YELLOW_BOLD_BRIGHT + "ANALYSE LEXICALE : " + RESET + "Veuillez saisir le nom de votre fichier " +
+                        "(exemple : "+ YELLOW_BOLD_BRIGHT + "testFile1" + RESET + ")");
                 openTestFile(nameFile);
             }
             else
