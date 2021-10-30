@@ -73,7 +73,7 @@ public class Application {
      * @throws SyntaxicAnalyzerException lorsqu'une erreur survient lors de l'analyse syntaxique, elle catégorise l'erreur selon son type
      */
     private static void startLexicalAnalyzer(List<String> inputList, String nameFile) throws LexicalAnalyzerException, SyntaxicAnalyzerException {
-        if(nameFile.length() == 1){
+        if(isDigit(nameFile.charAt(0))){
             nameFile = "testFile" + nameFile;
         }
 
