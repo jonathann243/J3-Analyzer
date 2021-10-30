@@ -1,13 +1,13 @@
 import java.util.List;
 
-import ExceptionCustom.LexicalAnalyzerException;
-import ExceptionCustom.SyntaxicAnalyzerException;
-import LexicalAnalyzer.LexicalAnalyzer;
-import SyntaxicAnalyzer.SyntaxicAnalyzer;
-import Utilitaire.Utils;
+import exceptionCustom.LexicalAnalyzerException;
+import exceptionCustom.SyntaxicAnalyzerException;
+import lexicalAnalyzer.LexicalAnalyzer;
+import syntaxicAnalyzer.SyntaxicAnalyzer;
+import utilitaire.Utils;
 import views.Menu;
 
-import static Utilitaire.Utils.*;
+import static utilitaire.Utils.*;
 
 /**
  * @author Josue Lubaki
@@ -48,12 +48,12 @@ public class Application {
 
     /**
      * Méthode qui permet d'ouvrir le ficher test dont l'utilisateur aura choisi
-     * @param testNumber le numéro correspondant au test dont l'utilisateur veut exécuter.
+     * @param nameFile le numéro correspondant au test dont l'utilisateur veut exécuter ou le nom du fichier.
      * @throws LexicalAnalyzerException lorsqu'une erreur survient lors de l'analyse lexicale, elle catégorise l'erreur selon son type
      * @throws SyntaxicAnalyzerException lorsqu'une erreur survient lors de l'analyse syntaxique, elle catégorise l'erreur selon son type
      */
-    private static void openTestFile(String testNumber) throws LexicalAnalyzerException, SyntaxicAnalyzerException {
-        List<String> allLinesFile = Utils.readFile(testNumber);
+    private static void openTestFile(String nameFile) throws LexicalAnalyzerException, SyntaxicAnalyzerException {
+        List<String> allLinesFile = Utils.readFile(nameFile);
 
         try {
             Thread.sleep(500);
@@ -62,7 +62,7 @@ public class Application {
         }
 
         // Lancement de l'analyse Lexicale
-        startLexicalAnalyzer(allLinesFile);
+        startLexicalAnalyzer(allLinesFile, nameFile);
     }
 
     /**
@@ -72,11 +72,15 @@ public class Application {
      * @throws LexicalAnalyzerException lorsqu'une erreur survient lors de l'analyse lexicale, elle catégorise l'erreur selon son type
      * @throws SyntaxicAnalyzerException lorsqu'une erreur survient lors de l'analyse syntaxique, elle catégorise l'erreur selon son type
      */
-    private static void startLexicalAnalyzer(List<String> inputList) throws LexicalAnalyzerException, SyntaxicAnalyzerException {
+    private static void startLexicalAnalyzer(List<String> inputList, String nameFile) throws LexicalAnalyzerException, SyntaxicAnalyzerException {
+        if(nameFile.length() == 1){
+            nameFile = "testFile" + nameFile;
+        }
+
         if (inputList.isEmpty()) {
             System.out.println(YELLOW_BOLD_BRIGHT + "\tANALYSE LEXICALE " + RESET + " $> Désolé, Le fichier est vide !");
         } else {
-            System.out.println("========================== FILE ==========================");
+            System.out.println("=================== FILE " + nameFile + ".txt =================");
             for (int i = 0; i < inputList.size(); i++){
                 System.out.println((i+1) + GREEN_BOLD + ".\t" + inputList.get(i) + RESET);
             }
