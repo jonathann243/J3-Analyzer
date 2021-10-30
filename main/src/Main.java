@@ -1,5 +1,5 @@
-import ExceptionCustom.LexicalAnalyzerException;
-import ExceptionCustom.SyntaxicAnalyzerException;
+import exceptionCustom.LexicalAnalyzerException;
+import exceptionCustom.SyntaxicAnalyzerException;
 
 public class Main {
     /**

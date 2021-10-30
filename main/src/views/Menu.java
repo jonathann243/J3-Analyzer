@@ -1,6 +1,6 @@
 package views;
 
-import static Utilitaire.Utils.*;
+import static utilitaire.Utils.*;
 
 /**
  * @author Josue Lubaki
@@ -15,7 +15,7 @@ public class Menu {
         System.out.println(YELLOW_BOLD + "\t\t\t\t\t\t╔═════════════════════╗" + RESET);
         System.out.println(YELLOW_BOLD + "\t\t\t\t\t\t║    MENU PRINCIPAL   ║" + RESET);
         System.out.println(YELLOW_BOLD + "\t\t\t\t\t\t╚═════════════════════╝" + RESET);
-        System.out.println("\tTous les fichiers se trouvent sur le path (\"src/TestsFiles\")"
+        System.out.println("\tTous les fichiers se trouvent sur le path (\"src/testsFiles\")"
                 + "\n\t Entrer le numero correspondant au fichier à ouvrir");
         System.out.println("\t 1. Test [correct]");
         System.out.println("\t 2. Test [incorrect] (le type de la variable n'est pas correct)");
